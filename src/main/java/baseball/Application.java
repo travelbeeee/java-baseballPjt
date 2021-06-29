@@ -11,7 +11,7 @@ public class Application {
         final Scanner scanner = new Scanner(System.in);
         // TODO 구현 진행
         while(true){
-            if(initGame(scanner))
+            if(!initGame(scanner))
                 break;
             ArrayList<Integer> answerNumber = makeThreeDistinctNumber();
             doGame(scanner, answerNumber);
@@ -24,9 +24,9 @@ public class Application {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         String finishGame = scanner.next();
         if(finishGame.equals("2"))
-            return true;
-        if(finishGame.equals("1"))
             return false;
+        if(finishGame.equals("1"))
+            return true;
         throw new IllegalArgumentException("잘못된 입력입니다");
     }
 
