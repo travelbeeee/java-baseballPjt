@@ -10,21 +10,22 @@ public class Application {
     public static void main(String[] args) {
         final Scanner scanner = new Scanner(System.in);
         // TODO 구현 진행
-        initGame(scanner);
-
-        return;
-    }
-
-    private static void initGame(Scanner scanner){
-        System.out.println("안녕하세요, 숫자 야구 게임입니다.");
         while(true){
-            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-            int doGameOrNot = scanner.nextInt();
-            if(doGameOrNot == 2)
+            boolean isFinished = initGame(scanner);
+            if(isFinished)
                 break;
             doGame(scanner);
         }
         return;
+    }
+
+    private static Boolean initGame(Scanner scanner){
+        System.out.println("안녕하세요, 숫자 야구 게임입니다.");
+        System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        int doGameOrNot = scanner.nextInt();
+        if(doGameOrNot == 2)
+            return true;
+        return false;
     }
 
     /**
