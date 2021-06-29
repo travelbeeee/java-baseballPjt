@@ -13,7 +13,8 @@ public class Application {
         while(true){
             if(initGame(scanner))
                 break;
-            doGame(scanner, makeThreeDistinctNumber());
+            ArrayList<Integer> answerNumber = makeThreeDistinctNumber();
+            doGame(scanner, answerNumber);
         }
         return;
     }
