@@ -22,10 +22,12 @@ public class Application {
     private static Boolean initGame(Scanner scanner){
         System.out.println("안녕하세요, 숫자 야구 게임입니다.");
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        int doGameOrNot = scanner.nextInt();
-        if(doGameOrNot == 2)
+        String finishGame = scanner.next();
+        if(finishGame.equals("2"))
             return true;
-        return false;
+        if(finishGame.equals("1"))
+            return false;
+        throw new IllegalArgumentException("잘못된 입력입니다");
     }
 
     /**
