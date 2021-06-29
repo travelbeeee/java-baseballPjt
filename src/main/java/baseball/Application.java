@@ -33,8 +33,55 @@ public class Application {
      */
     private static void doGame(Scanner scanner) {
         ArrayList<Integer> answerNumber = makeThreeDistinctNumber();
+        while(true){
+            System.out.print("숫자를 입력해주세요 : ");
+            String userInput = scanner.next();
+            if(!checkValidInput(userInput))
+                throw new IllegalArgumentException("제대로 된 입력이 아닙니다.");
+            if (checkInputAndMakeHint(answerNumber, userInput))
+                break;
+        }
+    }
 
-        return;
+    /**
+     * user가 입력한 3개의 숫자를 기반으로 힌트를 준다.
+     */
+    private static boolean checkInputAndMakeHint(ArrayList<Integer> answerNumber, String userInput) {
+        int strike = 0, ball = 0;
+        for (int ind = 0; ind < userInput.length(); ind++){
+            Integer userInputNumber = userInput.charAt(ind) - '0';
+            if(answerNumber.get(ind) == userInputNumber){
+                strike++;
+            }
+            else if (answerNumber.contains(userInputNumber)){
+                ball++;
+            }
+        }
+        if(ball == 0 && strike == 0){
+            System.out.println("낫싱");
+        }
+        else if (ball == 0){
+            System.out.println(strike + "스트라이크");
+        }
+        else{
+            System.out.println(ball + "볼 " + strike + "스트라이크");
+        }
+        if(strike == 3)
+            return true;
+        return false;
+    }
+
+    /**
+     * user가 입력한 3개의 숫자가 제대로 된 입력인지 확인한다.
+     */
+    private static boolean checkValidInput(String userInput){
+        System.out.println("userInput = " + userInput);
+        if(userInput.length() != 3) return false;
+        for (int ind = 0; ind < userInput.length(); ind++){
+            if(!('1' <= userInput.charAt(ind) && userInput.charAt(ind) <= '9'))
+                return false;
+        }
+        return true;
     }
 
     /**
