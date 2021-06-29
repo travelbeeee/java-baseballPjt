@@ -11,10 +11,9 @@ public class Application {
         final Scanner scanner = new Scanner(System.in);
         // TODO 구현 진행
         while(true){
-            boolean isFinished = initGame(scanner);
-            if(isFinished)
+            if(initGame(scanner))
                 break;
-            doGame(scanner);
+            doGame(scanner, makeThreeDistinctNumber());
         }
         return;
     }
@@ -34,8 +33,7 @@ public class Application {
      * 1) 게임을 진행하려면 먼저 서로 다른 3가지 숫자를 골라야된다.
      * 2) 사용자의 입력에 맞춰 게임을 진행한다.
      */
-    private static void doGame(Scanner scanner) {
-        ArrayList<Integer> answerNumber = makeThreeDistinctNumber();
+    private static void doGame(Scanner scanner, ArrayList<Integer> answerNumber) {
         while(true){
             System.out.print("숫자를 입력해주세요 : ");
             String userInput = scanner.next();
