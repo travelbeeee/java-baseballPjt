@@ -38,7 +38,7 @@ public class Application {
             String userInput = scanner.next();
             if(!checkValidInput(userInput))
                 throw new IllegalArgumentException("제대로 된 입력이 아닙니다.");
-            if (checkInputAndMakeHint(answerNumber, userInput))
+            if (makeHintByInput(answerNumber, userInput))
                 break;
         }
     }
@@ -46,7 +46,7 @@ public class Application {
     /**
      * user가 입력한 3개의 숫자를 기반으로 힌트를 준다.
      */
-    private static boolean checkInputAndMakeHint(ArrayList<Integer> answerNumber, String userInput) {
+    private static boolean makeHintByInput(ArrayList<Integer> answerNumber, String userInput) {
         int strike = 0, ball = 0;
         for (int ind = 0; ind < userInput.length(); ind++){
             Integer userInputNumber = userInput.charAt(ind) - '0';
@@ -66,8 +66,10 @@ public class Application {
         else{
             System.out.println(ball + "볼 " + strike + "스트라이크");
         }
-        if(strike == 3)
+        if(strike == 3) {
+            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
             return true;
+        }
         return false;
     }
 
@@ -94,20 +96,10 @@ public class Application {
             if(numberList.size() == 3)
                 break;
             int newNumber = RandomUtils.nextInt(startInclusive, endInclusive);
-            if(checkDuplicate(numberList, newNumber))
-                numberList.add(newNumber);
+            if(numberList.contains(newNumber))
+                continue;
+            numberList.add(newNumber);
         }
         return numberList;
-    }
-
-    /**
-     * 입력받은 newNumber랑 기존에 뽑은 numberList의 숫자들이랑 겹치는게 있는지 체크
-     */
-    private static boolean checkDuplicate(ArrayList<Integer> numberList, int newNumber) {
-        for(int num : numberList){
-            if(num == newNumber)
-                return false;
-        }
-        return true;
     }
 }
